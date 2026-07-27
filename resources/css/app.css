@@ -1,0 +1,388 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@import url('https://fonts.bunny.net/css?family=Nunito');
+ 
+/* Bootstrap */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+ 
+/* DataTables */
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+@import "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";
+@import 'datatables.net-select-bs5/css/select.bootstrap5.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+    --color-accent: var(--color-neutral-800);
+    --color-accent-content: var(--color-neutral-800);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
+
+/* ==========================================================================
+   Japan GCC Admin — "Control Tower" design system
+   Deep navy glass panels + electric cyan signal accent, monospace for
+   data-like content (codes, chassis/engine numbers, search).
+   Written with !important on key overrides since this layers on top of
+   the base admin template's own stylesheet, whose specificity we don't
+   control from here.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    --jgcc-bg:            #0B1220;
+    --jgcc-panel:         #111B2E;
+    --jgcc-panel-glass:   rgba(17, 27, 46, 0.72);
+    --jgcc-border:        rgba(255, 255, 255, 0.07);
+    --jgcc-cyan:          #00D9FF;
+    --jgcc-cyan-dim:      rgba(0, 217, 255, 0.15);
+    --jgcc-violet:        #7C6CF5;
+    --jgcc-text:          #E7ECF3;
+    --jgcc-text-muted:    #8793A8;
+    --jgcc-status-good:   #34D399;
+
+    --jgcc-font-display:  'Space Grotesk', sans-serif;
+    --jgcc-font-body:     'Inter', sans-serif;
+    --jgcc-font-mono:     'JetBrains Mono', monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+body {
+    background: var(--jgcc-bg) !important;
+    font-family: var(--jgcc-font-body);
+    color: var(--jgcc-text);
+}
+
+/* Ambient glow behind the page — subtle, not a spotlight */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 800px 500px at 10% -10%, rgba(0, 217, 255, 0.06), transparent 60%),
+        radial-gradient(ellipse 600px 400px at 100% 0%, rgba(124, 108, 245, 0.05), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--jgcc-cyan) !important;
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+
+.navbar {
+    background: var(--jgcc-panel-glass) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--jgcc-border) !important;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand-wrapper {
+    background: transparent !important;
+    border-right: 1px solid var(--jgcc-border) !important;
+}
+
+.navbar-brand.brand-logo {
+    font-family: var(--jgcc-font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, var(--jgcc-cyan), var(--jgcc-violet));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+}
+
+/* "system online" pulse dot next to the logo */
+.navbar-brand.brand-logo::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--jgcc-status-good);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+    animation: jgcc-pulse 2.2s ease-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes jgcc-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+/* Search box — styled like a command/data input, monospace + cyan focus glow */
+.nav-search .input-group-text {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--jgcc-border) !important;
+    border-right: none !important;
+    color: var(--jgcc-text-muted) !important;
+}
+
+.nav-search .form-control {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--jgcc-border) !important;
+    border-left: none !important;
+    color: var(--jgcc-text) !important;
+    font-family: var(--jgcc-font-mono);
+    font-size: 0.82rem;
+}
+
+.nav-search .form-control::placeholder {
+    color: var(--jgcc-text-muted);
+    opacity: 0.7;
+}
+
+.nav-search .input-group:focus-within .input-group-text,
+.nav-search .input-group:focus-within .form-control {
+    border-color: var(--jgcc-cyan) !important;
+    box-shadow: 0 0 0 1px var(--jgcc-cyan-dim);
+}
+
+/* Nav icons + dropdowns */
+.navbar-nav-right .nav-link {
+    color: var(--jgcc-text-muted) !important;
+}
+
+.navbar-nav-right .nav-link:hover {
+    color: var(--jgcc-cyan) !important;
+}
+
+.navbar-nav-right .count-indicator .count {
+    background: var(--jgcc-cyan) !important;
+    box-shadow: 0 0 8px var(--jgcc-cyan-dim);
+}
+
+.navbar-dropdown {
+    background: var(--jgcc-panel) !important;
+    border: 1px solid var(--jgcc-border) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+.navbar-dropdown .dropdown-header {
+    font-family: var(--jgcc-font-display);
+    color: var(--jgcc-text-muted) !important;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.navbar-dropdown .dropdown-item {
+    color: var(--jgcc-text) !important;
+    border-top: 1px solid var(--jgcc-border) !important;
+}
+
+.navbar-dropdown .dropdown-item:hover {
+    background: rgba(0, 217, 255, 0.06) !important;
+}
+
+.nav-profile-name {
+    color: var(--jgcc-text) !important;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   SIDEBAR
+   ========================================================================== */
+
+.sidebar {
+    background: var(--jgcc-panel-glass) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-right: 1px solid var(--jgcc-border) !important;
+}
+
+.sidebar .nav .nav-item .nav-link {
+    color: var(--jgcc-text-muted) !important;
+    font-family: var(--jgcc-font-body);
+    font-weight: 500;
+    font-size: 0.86rem;
+    position: relative;
+    border-left: 3px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.sidebar .nav .nav-item .nav-link .menu-icon {
+    color: var(--jgcc-text-muted) !important;
+    transition: color 0.15s ease;
+}
+
+.sidebar .nav .nav-item .nav-link .menu-title {
+    color: inherit;
+}
+
+/* Hover state */
+.sidebar .nav .nav-item .nav-link:hover {
+    color: var(--jgcc-text) !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.sidebar .nav .nav-item .nav-link:hover .menu-icon {
+    color: var(--jgcc-cyan) !important;
+}
+
+/* Active / expanded state — the signature glow bar */
+.sidebar .nav .nav-item .nav-link[aria-expanded="true"],
+.sidebar .nav .nav-item.active > .nav-link {
+    color: var(--jgcc-text) !important;
+    background: linear-gradient(90deg, rgba(0, 217, 255, 0.10), transparent) !important;
+    border-left-color: var(--jgcc-cyan);
+}
+
+.sidebar .nav .nav-item .nav-link[aria-expanded="true"] .menu-icon,
+.sidebar .nav .nav-item.active > .nav-link .menu-icon {
+    color: var(--jgcc-cyan) !important;
+    filter: drop-shadow(0 0 4px var(--jgcc-cyan-dim));
+}
+
+.sidebar .nav .nav-item .nav-link .menu-arrow {
+    transition: transform 0.2s ease;
+}
+
+.sidebar .nav .nav-item .nav-link[aria-expanded="true"] .menu-arrow {
+    transform: rotate(90deg);
+    color: var(--jgcc-cyan) !important;
+}
+
+/* Sub-menu */
+.sidebar .sub-menu .nav-link {
+    font-family: var(--jgcc-font-mono);
+    font-size: 0.78rem;
+    color: var(--jgcc-text-muted) !important;
+    border-left: 3px solid transparent;
+    padding-left: 3.2rem !important;
+}
+
+.sidebar .sub-menu .nav-link::before {
+    content: '›';
+    margin-right: 6px;
+    color: var(--jgcc-cyan);
+    opacity: 0.6;
+}
+
+.sidebar .sub-menu .nav-link:hover {
+    color: var(--jgcc-cyan) !important;
+    background: rgba(0, 217, 255, 0.05) !important;
+}
+
+/* Sidebar scrollbar, if it overflows */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.footer {
+    background: transparent !important;
+    border-top: 1px solid var(--jgcc-border) !important;
+    color: var(--jgcc-text-muted) !important;
+    font-size: 0.78rem;
+    padding: 1rem 1.5rem;
+}
+
+.footer a {
+    color: var(--jgcc-cyan) !important;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer .footer-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--jgcc-font-mono);
+    font-size: 0.72rem;
+    color: var(--jgcc-text-muted);
+}
+
+.footer .footer-status .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--jgcc-status-good);
+    box-shadow: 0 0 6px rgba(52, 211, 153, 0.6);
+}
